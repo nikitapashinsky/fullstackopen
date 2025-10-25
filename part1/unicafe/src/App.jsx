@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Button from "./Button";
+import Statistics from "./Statistics";
 
 const App = () => {
   // save clicks of each button to its own state
@@ -38,34 +39,15 @@ const App = () => {
           <Button id="bad" label="bad" onClick={handleClick} />
         </div>
       </div>
-      <div className="flex flex-col gap-3">
-        <h1 className="text-2xl font-medium">statistics</h1>
-        <div className="flex flex-col gap-3">
-          <div className="grid grid-cols-2 gap-1 text-sm">
-            <p>good</p>
-            <p>{good}</p>
-
-            <p>neutral</p>
-            <p>{neutral}</p>
-
-            <p>bad</p>
-            <p>{bad}</p>
-
-            <p>total</p>
-            <p>{totalFeedbacks}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-1 text-sm">
-            <p>total score</p>
-            <p>{totalScore}</p>
-
-            <p>average score</p>
-            <p>{average.toFixed(2)}</p>
-
-            <p>positive</p>
-            <p>{positive.toFixed(2)}%</p>
-          </div>
-        </div>
-      </div>
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        totalFeedbacks={totalFeedbacks}
+        totalScore={totalScore}
+        average={average}
+        positive={positive}
+      />
     </main>
   );
 };
