@@ -8,7 +8,7 @@ sequenceDiagram
     server-->>browser: URL redirect
     deactivate server
 
-    Note right of browser: Server responds with a URL redirect, and redirects browser to /notes
+    Note right of browser: Server responds with a URL redirect, and asks browser to make a GET request to /notes
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
