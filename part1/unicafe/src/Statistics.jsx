@@ -1,3 +1,5 @@
+import StatisticLine from "./StatisticLine";
+
 const Statistics = ({
   good,
   neutral,
@@ -12,28 +14,19 @@ const Statistics = ({
       <h1 className="text-2xl font-medium">statistics</h1>
       {totalFeedbacks > 0 ? (
         <div className="flex flex-col gap-3">
-          <div className="grid grid-cols-2 gap-1 text-sm">
-            <p>good</p>
-            <p>{good}</p>
-
-            <p>neutral</p>
-            <p>{neutral}</p>
-
-            <p>bad</p>
-            <p>{bad}</p>
-
-            <p>total</p>
-            <p>{totalFeedbacks}</p>
+          <div className="flex flex-col gap-1">
+            <StatisticLine text="good" value={good} />
+            <StatisticLine text="neutral" value={neutral} />
+            <StatisticLine text="bad" value={bad} />
+            <StatisticLine text="total" value={totalFeedbacks} />
           </div>
-          <div className="grid grid-cols-2 gap-1 text-sm">
-            <p>total score</p>
-            <p>{totalScore}</p>
-
-            <p>average score</p>
-            <p>{average.toFixed(2)}</p>
-
-            <p>positive</p>
-            <p>{positive.toFixed(2)}%</p>
+          <div className="flex flex-col gap-1">
+            <StatisticLine text="total score" value={totalScore} />
+            <StatisticLine text="average score" value={average.toFixed(2)} />
+            <StatisticLine
+              text="% positive"
+              value={`${positive.toFixed(2)}%`}
+            />
           </div>
         </div>
       ) : (
