@@ -12,7 +12,7 @@ const Statistics = ({
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-2xl font-medium">statistics</h1>
-      {totalFeedbacks > 0 ? (
+      {totalFeedbacks >= 0 ? (
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
             <StatisticLine text="good" value={good} />
