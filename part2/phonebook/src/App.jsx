@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import AddContact from "./components/AddContact";
 import Contacts from "./components/Contacts";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", phone: "+19365331007", id: 1 },
-    { name: "Ada Lovelace", phone: "+18772688722", id: 2 },
-    { name: "Dan Abramov", phone: "+13365917243", id: 3 },
-    { name: "Mary Poppendieck", phone: "+18433509567", id: 4 },
-  ]);
-
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [filterString, setFilterString] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then((response) => setPersons(response.data));
+  }, []);
 
   const phoneRegex = /\+?1?\s*\(?\d{3}\)?\s*\d{3}\s*\d{4}(?:\s?(?:x|ext)\.?\s?\d{1,5})?/;
 
