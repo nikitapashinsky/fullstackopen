@@ -11,15 +11,27 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+form,
+label,
 input,
 textarea,
 select,
 button {
   font-family: inherit;
+  font-size: 1rem;
 }
 
 form {
   display: flex;
+  flex-direction: column;
+  /*align-items: start;*/
+  gap: 1rem;
+}
+
+label {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  align-items: baseline;
   gap: 0.5rem;
 }
 
@@ -34,9 +46,19 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  li {
+    display: flex;
+    gap: 0.5rem;
+
+    span:first-child {
+      font-weight: 500;
+    }
+  }
 }
 
 button {
+  min-width: 0;
   font-weight: 500;
 }
 
