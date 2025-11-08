@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: "SF Pro", sans-serif, system-ui;
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+h1 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+button {
+  font-weight: 500;
+}
+
+#debug {
+  position: fixed;
+  padding: 6px 8px;
+  inset-inline-start: 8px;
+  inset-inline-end: 8px;
+  bottom: 8px;
+
+  border-radius: 4px;
+  background-color: hsl(from Canvas h s calc(l - 5));
+
+  font-family: monospace;
+}
