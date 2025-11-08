@@ -60,11 +60,25 @@ ul {
   padding-inline-start: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 
   li {
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: 6px;
+
+    &:hover {
+      background-color: light-dark(
+        hsl(from Canvas h s calc(l - 5)),
+        hsl(from Canvas h s calc(l + 5))
+      );
+    }
+
+    & > div {
+      display: flex;
+      gap: 0.5rem;
+    }
 
     & span:first-child {
       font-weight: 500;

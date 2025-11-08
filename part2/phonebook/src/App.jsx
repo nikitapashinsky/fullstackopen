@@ -53,6 +53,17 @@ const App = () => {
     setNewPhone("");
   }
 
+  function handleDeleteClick(id) {
+    const name = persons.filter((person) => person.id === id)[0].name;
+    confirm(`Delete contact ${name}?`);
+
+    contactsService
+      .deleteContact(id)
+      .then((deletedContact) =>
+        setPersons(persons.filter((person) => person.id !== deletedContact.id)),
+      );
+  }
+
   return (
     <main>
       <h1>phonebook</h1>
@@ -67,6 +78,7 @@ const App = () => {
         contacts={persons}
         filterString={filterString}
         onFilterStringChange={handleFilterStringChange}
+        onDeleteClick={handleDeleteClick}
       />
     </main>
   );

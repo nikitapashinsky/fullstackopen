@@ -1,7 +1,7 @@
 import Contact from "./Contact";
 import FilterContacts from "./FilterContacts";
 
-const Contacts = ({ contacts, filterString, onFilterStringChange }) => {
+const Contacts = ({ contacts, filterString, onFilterStringChange, onDeleteClick }) => {
   return (
     <div id="contacts">
       <h2>contacts</h2>
@@ -10,7 +10,12 @@ const Contacts = ({ contacts, filterString, onFilterStringChange }) => {
         {contacts.map(
           (contact) =>
             contact.name.toLowerCase().includes(filterString) && (
-              <Contact key={contact.id} name={contact.name} phone={contact.phone} />
+              <Contact
+                key={contact.id}
+                name={contact.name}
+                phone={contact.phone}
+                onDeleteClick={() => onDeleteClick(contact.id)}
+              />
             ),
         )}
       </ul>

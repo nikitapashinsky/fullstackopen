@@ -1,8 +1,11 @@
-const Contact = ({ name, phone }) => {
+const Contact = ({ name, phone, onDeleteClick }) => {
   return (
     <li>
-      <span>{name}</span>
-      <span>{phone}</span>
+      <div>
+        <span>{name}</span>
+        <span>{phone}</span>
+      </div>
+      <button onClick={onDeleteClick}>Delete</button>
     </li>
   );
 };
