@@ -1,15 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Note from "./components/Note";
 
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes);
+const App = () => {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
 
-  const notesToShow = showAll ? notes : notes.filter((note) => note.important === true);
+  useEffect(() => {
+    console.log("effect");
+    axios
+      .get("http://localhost:3001/notes")
+      .then((response) => {
+        console.log("promise fulfilled");
+        setNotes(response.data);
+      })
+      .catch((error) => {
+        console.error("error: ", error);
+        setNotes([{ id: 0, content: "Couldn't load notes. Please try again." }]);
+      })
+      .finally(console.log("finally"));
+  }, []);
+  console.log("render", notes.length, "notes");
+
+  // prettier-ignore
+  const notesToShow = showAll
+    ? notes
+    : notes.filter((note) => note.important === true);
 
   const handleNoteChange = (event) => {
-    console.log(event.target.value);
     setNewNote(event.target.value);
   };
 
@@ -34,11 +53,6 @@ const App = (props) => {
     <div>
       <h1>notes</h1>
       <button onClick={() => setShowAll(!showAll)}>show {showAll ? "important" : "all"}</button>
-      <ul>
-        {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
-        ))}
-      </ul>
       <form onSubmit={addNote}>
         <input
           required
@@ -49,6 +63,11 @@ const App = (props) => {
         />
         <button type="submit">add note</button>
       </form>
+      <ul>
+        {notesToShow.map((note) => (
+          <Note key={note.id} note={note} />
+        ))}
+      </ul>
     </div>
   );
 };
