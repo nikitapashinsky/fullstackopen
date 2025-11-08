@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import contactsService from "./services/contacts";
+
 import AddContact from "./components/AddContact";
 import Contacts from "./components/Contacts";
 
@@ -10,7 +11,7 @@ const App = () => {
   const [filterString, setFilterString] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => setPersons(response.data));
+    contactsService.getAll().then((contacts) => setPersons(contacts));
   }, []);
 
   const phoneRegex = /\+?1?\s*\(?\d{3}\)?\s*\d{3}\s*\d{4}(?:\s?(?:x|ext)\.?\s?\d{1,5})?/;
@@ -42,7 +43,12 @@ const App = () => {
       return;
     }
 
-    setPersons([...persons, { name: newName, phone: newPhone, id: persons.at(-1).id + 1 }]);
+    const newPerson = { name: newName, phone: newPhone, id: String(persons.length + 1) };
+
+    contactsService
+      .create(newPerson)
+      .then((returnedPerson) => setPersons([...persons, returnedPerson]));
+
     setNewName("");
     setNewPhone("");
   }
