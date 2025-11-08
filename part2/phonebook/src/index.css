@@ -51,8 +51,15 @@ ul {
     display: flex;
     gap: 0.5rem;
 
-    span:first-child {
+    & span:first-child {
       font-weight: 500;
+    }
+
+    & span:nth-child(2) {
+      color: light-dark(
+        hsl(from CanvasText h s calc(l + 30)),
+        hsl(from CanvasText h s calc(l - 30))
+      );
     }
   }
 }
