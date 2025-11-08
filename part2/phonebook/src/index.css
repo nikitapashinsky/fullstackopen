@@ -1,6 +1,4 @@
-* {
-  box-sizing: border-box;
-}
+@import "reset.css";
 
 :root {
   color-scheme: light dark;
@@ -9,6 +7,14 @@
 body {
   font-family: "SF Pro", sans-serif, system-ui;
   -webkit-font-smoothing: antialiased;
+
+  padding: 1rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 form,
@@ -24,7 +30,13 @@ button {
 form {
   display: flex;
   flex-direction: column;
-  /*align-items: start;*/
+  gap: 1rem;
+}
+
+#contacts {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -33,9 +45,12 @@ label {
   grid-template-columns: 0.2fr 1fr;
   align-items: baseline;
   gap: 0.5rem;
+  font-weight: 500;
 }
 
-h1 {
+h1,
+h2,
+h3 {
   font-weight: 500;
   letter-spacing: -0.02em;
 }
