@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import noteService from "./services/notes";
 import Note from "./components/Note";
 
 const App = () => {
@@ -8,29 +9,10 @@ const App = () => {
   const [showAll, setShowAll] = useState(true);
 
   useEffect(() => {
-    console.log("effect");
-    axios
-      .get("http://localhost:3001/notes")
-      .then((response) => {
-        console.log("promise fulfilled");
-        setNotes(response.data);
-      })
-      .catch((error) => {
-        console.error("error: ", error);
-        setNotes([{ id: 0, content: "Couldn't load notes. Please try again." }]);
-      })
-      .finally(console.log("finally"));
+    noteService.getAll().then((initialNotes) => setNotes(initialNotes));
   }, []);
-  console.log("render", notes.length, "notes");
 
-  // prettier-ignore
-  const notesToShow = showAll
-    ? notes
-    : notes.filter((note) => note.important === true);
-
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value);
-  };
+  const notesToShow = showAll ? notes : notes.filter((note) => note.important === true);
 
   const addNote = (event) => {
     event.preventDefault();
@@ -45,12 +27,33 @@ const App = () => {
       id: String(notes.length + 1),
     };
 
-    setNotes(notes.concat(noteObject));
-    setNewNote("");
+    noteService.create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote));
+      setNewNote("");
+    });
+  };
+
+  const toggleImportantOf = (id) => {
+    const note = notes.find((note) => note.id === id);
+    const changedNote = { ...note, important: !note.important };
+
+    noteService
+      .update(id, changedNote)
+      .then((returnedNote) =>
+        setNotes(notes.map((note) => (note.id === id ? returnedNote : note))),
+      )
+      .catch((error) => {
+        alert(`the note ${note.content} was already deleted from the server`);
+        setNotes(notes.filter((note) => note.id !== id));
+      });
+  };
+
+  const handleNoteChange = (event) => {
+    setNewNote(event.target.value);
   };
 
   return (
-    <div>
+    <main>
       <h1>notes</h1>
       <button onClick={() => setShowAll(!showAll)}>show {showAll ? "important" : "all"}</button>
       <form onSubmit={addNote}>
@@ -65,10 +68,10 @@ const App = () => {
       </form>
       <ul>
         {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
+          <Note key={note.id} note={note} toggleImportance={() => toggleImportantOf(note.id)} />
         ))}
       </ul>
-    </div>
+    </main>
   );
 };
 
