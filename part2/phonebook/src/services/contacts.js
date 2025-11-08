@@ -16,4 +16,9 @@ async function deleteContact(contactId) {
   return request.then((response) => response.data);
 }
 
-export default { getAll, create, deleteContact };
+async function updateContact(contactId, newContact) {
+  const request = axios.put(`${baseUrl}/${contactId}`, newContact);
+  return request.then((response) => response.data);
+}
+
+export default { getAll, create, deleteContact, updateContact };

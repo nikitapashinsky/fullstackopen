@@ -39,7 +39,32 @@ const App = () => {
     }
 
     if (persons.some((person) => person.name === newName)) {
-      alert(`A person with name ${newName} already exists.`);
+      const existingPerson = persons.filter((person) => person.name === newName)[0];
+      if (existingPerson.phone !== newPhone) {
+        confirm(
+          `${newName} is already added to the phonebook, update phone number with the new one?`,
+        );
+        contactsService
+          .updateContact(existingPerson.id, {
+            ...existingPerson,
+            phone: newPhone,
+          })
+          .then((returnedPerson) =>
+            setPersons(
+              persons.map((person) =>
+                person.id === existingPerson.id ? returnedPerson : person,
+              ),
+            ),
+          );
+        setNewName("");
+        setNewPhone("");
+      } else {
+        alert(
+          `${newName} is already in the phonebook with the same phone number, nothing to add or update.`,
+        );
+        setNewName("");
+        setNewPhone("");
+      }
       return;
     }
 
