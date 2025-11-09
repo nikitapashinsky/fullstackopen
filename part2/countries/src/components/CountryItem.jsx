@@ -1,6 +1,17 @@
+import { useState } from "react";
 import cn from "../utils/cn";
+import countriesService from "../services/countriesService";
+import { useEffect } from "react";
 
 const CountryItem = ({ country }) => {
+  const [currentTemp, setCurrentTemp] = useState(null);
+
+  useEffect(() => {
+    countriesService
+      .getWeather(country.latlng[0], country.latlng[1])
+      .then((data) => setCurrentTemp(data.current.temperature_2m));
+  }, [country.latlng]);
+
   return (
     <div className={cn("flex flex-col gap-6")}>
       <div className="flex min-h-10 items-start gap-4 px-2 pt-1.5">
@@ -30,7 +41,12 @@ const CountryItem = ({ country }) => {
             <div className={cn("text-neutral-600 dark:text-neutral-400")}>
               Capital
             </div>
-            <div className={cn("font-medium")}>{country.capital[0]}</div>
+            <div className={cn("flex items-center gap-2 font-medium")}>
+              {country.capital[0]}
+              <span className="rounded-sm px-1 text-sm font-semibold dark:bg-neutral-800 dark:text-neutral-300">
+                {currentTemp} °C
+              </span>
+            </div>
           </>
         )}
 

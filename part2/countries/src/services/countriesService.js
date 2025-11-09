@@ -11,4 +11,11 @@ const getCountryByName = async (countryName) => {
   return request.then((response) => response.data);
 };
 
-export default { getAllCountries, getCountryByName };
+const getWeather = async (latitude, longitude) => {
+  const request = axios.get(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m`,
+  );
+  return request.then((response) => response.data);
+};
+
+export default { getAllCountries, getCountryByName, getWeather };

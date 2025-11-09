@@ -23,13 +23,8 @@ const App = () => {
       country.name.official.toLowerCase().includes(searchValue),
   );
 
-  // useEffect(() => {
-  //   if (filteredCountries && filteredCountries.length !== 1) {
-  //     setSelectedCountry(null);
-  //   }
-  // }, [filteredCountries]);
-
   const renderCountries = (filteredCountries) => {
+    console.log(filteredCountries);
     if (searchValue.length === 0) return;
 
     if (filteredCountries.length > 20) {
@@ -46,7 +41,6 @@ const App = () => {
     }
 
     if (filteredCountries.length === 1) {
-      // setSelectedCountry(null);
       return <CountryItem country={filteredCountries[0]} />;
     }
   };
