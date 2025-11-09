@@ -66,10 +66,19 @@ const App = () => {
               setTimeout(() => setNotification(null), 3000);
 
               setPersons(
-                persons.map((person) =>
-                  person.id === existingPerson.id ? returnedPerson : person,
+                persons.map((p) =>
+                  p.id === existingPerson.id ? returnedPerson : p,
                 ),
               );
+            })
+            .catch((error) => {
+              setNotification({
+                type: "error",
+                text: `contact ${newName} not found on server`,
+              });
+              setTimeout(() => setNotification(null), 3000);
+
+              setPersons(persons.filter((p) => p.id !== existingPerson.id));
             });
           setNewName("");
           setNewPhone("");
