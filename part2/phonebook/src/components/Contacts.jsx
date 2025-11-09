@@ -1,11 +1,19 @@
 import Contact from "./Contact";
 import FilterContacts from "./FilterContacts";
 
-const Contacts = ({ contacts, filterString, onFilterStringChange, onDeleteClick }) => {
+const Contacts = ({
+  contacts,
+  filterString,
+  onFilterStringChange,
+  onDeleteClick,
+}) => {
   return (
-    <div id="contacts">
-      <h2>contacts</h2>
-      <FilterContacts filterString={filterString} onFilterStringChange={onFilterStringChange} />
+    <div className="flex flex-col gap-2">
+      <h2 className="text-xl font-medium">contacts</h2>
+      <FilterContacts
+        filterString={filterString}
+        onFilterStringChange={onFilterStringChange}
+      />
       <ul>
         {contacts.map(
           (contact) =>
