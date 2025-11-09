@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "id": "41",
-      "name": "Michael Scott",
-      "phone": "+18506760494"
-    },
-    {
       "id": "6",
       "name": "Jim Halpert",
       "phone": "+19175151827"

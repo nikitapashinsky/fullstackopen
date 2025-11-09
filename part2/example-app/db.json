@@ -18,7 +18,7 @@
     {
       "id": "4",
       "content": "this is fun",
-      "important": true
+      "important": false
     },
     {
       "id": "5",
@@ -28,7 +28,7 @@
     {
       "id": "6",
       "content": "test",
-      "important": true
+      "important": false
     },
     {
       "id": "7",
@@ -49,6 +49,11 @@
       "id": "10",
       "content": "hello world",
       "important": false
+    },
+    {
+      "id": "12",
+      "content": "hello world",
+      "important": true
     }
   ]
 }
