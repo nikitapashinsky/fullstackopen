@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import contactsService from "./services/contacts";
-import cn from "./utils/cn";
 
 import AddContact from "./components/AddContact";
 import Contacts from "./components/Contacts";
